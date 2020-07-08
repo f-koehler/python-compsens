@@ -7,6 +7,10 @@ def create_operator_dct1d(n: int, samples: numpy.ndarray) -> numpy.ndarray:
     return fft.idct(numpy.identity(n), norm="ortho", axis=0)[samples]
 
 
+def create_operator_rfft1d(n: int, samples: numpy.ndarray) -> numpy.ndarray:
+    return fft.irfft(numpy.identity(n), norm="ortho", axis=0)[samples]
+
+
 def optimize(s: numpy.ndarray, A: numpy.ndarray):
     m = A.shape[0]
     n = A.shape[1]

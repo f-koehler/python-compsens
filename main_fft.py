@@ -23,28 +23,29 @@ samples.sort()
 s = y[samples]
 
 # Operator to transform solution to temporal domain and perform the sampling.
-A = compsens.create_operator_dct1d(n, samples)
+A = compsens.create_operator_rfft1d(n, samples)
 
 # Compute the solution of the optimization problem
 f = compsens.optimize(s, A)
 
 # Reconstruct signal using inverse transformation
-y_prime = fft.idct(f, norm="ortho")
+y_prime = fft.irfft(f, norm="ortho")
 
+
+d = t[1] - t[0]
 fig, ((ax1, ax2), (ax3, ax4), (ax5, ax6)) = plt.subplots(3, 2)
 ax1.plot(t, y)
-ax2.plot(fft.dct(y, norm="ortho"))
+ax2.plot(fft.rfft(y, norm="ortho").real)
 ax3.plot(t[samples], s)
-ax4.plot(fft.dct(s, norm="ortho"))
-ax5.plot(t, y_prime)
-ax6.plot(f)
+ax5.plot(t, y_prime[:n])
+ax6.plot(f.real)
 
 ax1.set_title("original signal")
-ax2.set_title("original signal (DCT)")
+ax2.set_title("original signal (FFT specrum)")
 ax3.set_title("sampled signal")
-ax4.set_title("sampled signal (DCT)")
+ax4.set_title("sampled signal (FFT specrum)")
 ax5.set_title("reconstructed signal")
-ax6.set_title("reconstructed signal (DCT)")
+ax6.set_title("reconstructed signal (FFT specrum)")
 
 ax2.set_xlim(0, 20)
 ax4.set_xlim(0, 20)
