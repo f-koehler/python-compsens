@@ -1,5 +1,5 @@
 import numpy
-import scipy.fftpack as fft
+from scipy import fft
 import cvxpy
 
 
