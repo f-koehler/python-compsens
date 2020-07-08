@@ -39,6 +39,13 @@ ax4.plot(fft.dct(s, norm="ortho"))
 ax5.plot(t, y_prime)
 ax6.plot(f)
 
+ax1.set_title("original signal")
+ax2.set_title("original signal (DCT)")
+ax3.set_title("sampled signal")
+ax4.set_title("sampled signal (DCT)")
+ax5.set_title("sampled signal")
+ax6.set_title("sampled signal (DCT)")
+
 ax2.set_xlim(0, 20)
 ax4.set_xlim(0, 20)
 ax6.set_xlim(0, 20)
