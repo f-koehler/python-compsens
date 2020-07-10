@@ -1,4 +1,5 @@
 *.egg-info/
+.venv/
 .vim/.ropeproject/
 __pycache__/
 dist/
