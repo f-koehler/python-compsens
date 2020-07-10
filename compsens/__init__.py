@@ -1,8 +1,8 @@
 from typing import Union
 
-from scipy import fft
-import numpy
 import cvxpy
+import numpy
+from scipy import fft
 
 
 def get_random_sample_indices_1d(

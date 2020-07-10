@@ -55,3 +55,17 @@ class DST1D(Trafo1D):
         return fft.idst(numpy.identity(n), type=self.type, norm=self.norm, axis=0)[
             samples
         ]
+
+
+class RFFT1D(Trafo1D):
+    def __init__(self, norm: Optional[str] = "ortho"):
+        self.norm = norm
+
+    def transform(self, signal: numpy.ndarray) -> numpy.ndarray:
+        return fft.rfft(signal, norm=self.norm)
+
+    def transform_back(self, signal: numpy.ndarray) -> numpy.ndarray:
+        return fft.irfft(signal, norm=self.norm)
+
+    def get_sampling_matrix(self, n: int, samples: numpy.ndarray) -> numpy.ndarray:
+        return fft.irfft(numpy.identity(n), norm=self.norm, axis=0)[samples]
