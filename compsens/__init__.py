@@ -1,14 +1,30 @@
-import numpy
+from typing import Union
+
 from scipy import fft
+import numpy
 import cvxpy
 
 
-def create_operator_dct1d(n: int, samples: numpy.ndarray) -> numpy.ndarray:
-    return fft.idct(numpy.identity(n), norm="ortho", axis=0)[samples]
+def get_random_sample_indices_1d(
+    signal: numpy.ndarray, samples: Union[int, float]
+) -> numpy.ndarray:
+    n = len(signal)
+
+    if isinstance(samples, float):
+        m = int(numpy.round(len(signal) * samples))
+    elif isinstance(samples, int):
+        m = samples
+    else:
+        raise TypeError("samples should be either a float or an int")
+
+    indices = numpy.random.choice(n, m, replace=False)
+    indices.sort()
+    return indices
 
 
-def create_operator_rfft1d(n: int, samples: numpy.ndarray) -> numpy.ndarray:
-    return fft.irfft(numpy.identity(n), norm="ortho", axis=0)[samples]
+def get_sample_indices_1d(signal: numpy.ndarray, stride: int):
+    n = len(signal)
+    return numpy.arange(0, n, stride)
 
 
 def optimize(s: numpy.ndarray, A: numpy.ndarray):

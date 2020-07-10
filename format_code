@@ -1,0 +1,10 @@
+#!/bin/bash
+set -euf -o pipefail
+
+FILES="$(find archinst -name *.py) vm.py"
+
+echo "Run isort"
+isort -j $(nproc) ${FILES} || exit
+
+echo "Run black"
+black --target-version py38 ${FILES} || exit
